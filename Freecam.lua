@@ -21,9 +21,6 @@ local Workspace = game:GetService("Workspace")
 local Settings = UserSettings()
 local GameSettings = Settings.GameSettings
 
--- Cross-Script Communication
-local CSC = require(script.Parent.CSC)
-
 local LocalPlayer = Players.LocalPlayer
 if not LocalPlayer then
 	Players:GetPropertyChangedSignal("LocalPlayer"):Wait()
