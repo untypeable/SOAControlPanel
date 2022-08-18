@@ -322,13 +322,7 @@ local function StepFreecam(dt)
 	cameraRot = cameraRot + pan*PAN_GAIN*(dt/zoomFactor)
 	cameraRot = Vector2.new(clamp(cameraRot.x, -PITCH_LIMIT, PITCH_LIMIT), cameraRot.y%(2*pi))
 	
-	local cameraCFrame
-	if CSC.CSC_PendingCameraMove == true then
-		cameraCFrame = CFrame.new(CSC.CSC_CameraMoveCFrame.Position)*CFrame.fromOrientation(cameraRot.x, cameraRot.y, 0)*CFrame.new(vel*NAV_GAIN*dt)
-		CSC.CSC_PendingCameraMove = false
-	else
-		cameraCFrame = CFrame.new(cameraPos)*CFrame.fromOrientation(cameraRot.x, cameraRot.y, 0)*CFrame.new(vel*NAV_GAIN*dt)
-	end
+	local cameraCFrame = CFrame.new(cameraPos)*CFrame.fromOrientation(cameraRot.x, cameraRot.y, 0)*CFrame.new(vel*NAV_GAIN*dt)
 	
 	cameraPos = cameraCFrame.p
 
