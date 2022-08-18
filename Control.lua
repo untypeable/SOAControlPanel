@@ -1,4 +1,4 @@
-local ControlPanel = script.Parent
+local ControlPanel = game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("ControlPanel")
 
 ControlPanel.MainWindow.Active = true
 ControlPanel.MainWindow.Draggable = true
