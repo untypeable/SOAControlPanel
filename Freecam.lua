@@ -442,10 +442,10 @@ do
 	local function ToggleFreecam()
 		if enabled then
 			StopFreecam()
-			CSC.CSC_FreecamEnabled = false
+			_G.FreecamEnabled = false
 		else
 			StartFreecam()
-			CSC.CSC_FreecamEnabled = true
+			_G.FreecamEnabled = true
 		end
 		enabled = not enabled
 	end
