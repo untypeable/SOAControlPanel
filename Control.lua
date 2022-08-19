@@ -72,7 +72,7 @@ game:GetService("Players").PlayerAdded:Connect(UpdatePlayerList)
 ControlPanel.MainWindow.RefreshButton.MouseButton1Click:Connect(UpdatePlayerList)
 
 ControlPanel.MainWindow.Header.ExitButton.MouseButton1Click:Connect(function()
-	script.Parent:Destroy()
+	script:Destroy()
 end)
 
 ControlPanel.MainWindow.Header.MinimizeButton.MouseButton1Click:Connect(function()
