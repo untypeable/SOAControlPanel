@@ -322,14 +322,16 @@ local function StepFreecam(dt)
 	cameraRot = cameraRot + pan*PAN_GAIN*(dt/zoomFactor)
 	cameraRot = Vector2.new(clamp(cameraRot.x, -PITCH_LIMIT, PITCH_LIMIT), cameraRot.y%(2*pi))
 	
-	local cameraCFrame
+	local cameraCFrame = CFrame.new(cameraPos)*CFrame.fromOrientation(cameraRot.x, cameraRot.y, 0)*CFrame.new(vel*NAV_GAIN*dt)
 	if _G.CameraMovePending == true then
 		cameraCFrame = CFrame.new(_G.CameraMovePos)*CFrame.fromOrientation(cameraRot.x, cameraRot.y, 0)*CFrame.new(vel*NAV_GAIN*dt)
 		_G.CameraMovePending = false
 	elseif _G.GluecamEnabled == true then
-		cameraCFrame = CFrame.new(_G.GluecamTarget.Character.Head.CFrame.Position + Vector3.new(0, 10, 0))*CFrame.fromOrientation(cameraRot.x, cameraRot.y, 0)*CFrame.new(vel*NAV_GAIN*dt)
-	else
-		cameraCFrame = CFrame.new(cameraPos)*CFrame.fromOrientation(cameraRot.x, cameraRot.y, 0)*CFrame.new(vel*NAV_GAIN*dt)
+		if _G.GluecamTarget:FindFirstChild("Character") then
+			if _G.GluecamTarget.Character:FindFirstChild("Head") then
+				cameraCFrame = CFrame.new(_G.GluecamTarget.Character.Head.CFrame.Position + Vector3.new(0, 10, 0))*CFrame.fromOrientation(cameraRot.x, cameraRot.y, 0)*CFrame.new(vel*NAV_GAIN*dt)
+			end
+		end
 	end
 	
 	cameraPos = cameraCFrame.p
