@@ -329,7 +329,7 @@ local function StepFreecam(dt)
 	elseif _G.GluecamEnabled == true then
 		if _G.GluecamTarget:FindFirstChild("Character") then
 			if _G.GluecamTarget.Character:FindFirstChild("Head") then
-				cameraCFrame = CFrame.new(_G.GluecamTarget.Character.Head.CFrame.Position + Vector3.new(0, 10, 0))*CFrame.fromOrientation(cameraRot.x, cameraRot.y, 0)*CFrame.new(vel*NAV_GAIN*dt)
+				cameraCFrame = CFrame.new(_G.GluecamTarget.Character.Head.CFrame.Position)*CFrame.fromOrientation(cameraRot.x, cameraRot.y, 0)*CFrame.new(vel*NAV_GAIN*dt)
 			else
 				print("So, no head?")
 			end
