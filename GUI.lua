@@ -32,6 +32,7 @@ local IsAdmin = Instance.new("Folder")
 local Value_4 = Instance.new("TextBox")
 local Info_4 = Instance.new("TextLabel")
 local SnapCameraButton = Instance.new("TextButton")
+local GlueCameraButton = Instance.new("TextButton")
 local RefreshHint = Instance.new("TextLabel")
 local PanelButton = Instance.new("TextButton")
 
@@ -108,9 +109,12 @@ PlayerList.Active = true
 PlayerList.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 PlayerList.BackgroundTransparency = 0.750
 PlayerList.BorderSizePixel = 0
-PlayerList.Position = UDim2.new(0, 0, 0, 50)
-PlayerList.Size = UDim2.new(0, 150, 0, 350)
+PlayerList.Position = UDim2.new(0, 0, 0, 55)
+PlayerList.Size = UDim2.new(0, 150, 0, 345)
+PlayerList.BottomImage = "http://www.roblox.com/asset/?id=1980467285"
+PlayerList.MidImage = "http://www.roblox.com/asset/?id=1980354550"
 PlayerList.ScrollBarThickness = 10
+PlayerList.TopImage = "http://www.roblox.com/asset/?id=1980467285"
 PlayerList.VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Left
 
 EmptyPlayerBar.Name = "EmptyPlayerBar"
@@ -118,15 +122,14 @@ EmptyPlayerBar.Parent = PlayerList
 EmptyPlayerBar.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 EmptyPlayerBar.BackgroundTransparency = 0.750
 EmptyPlayerBar.BorderSizePixel = 0
-EmptyPlayerBar.Position = UDim2.new(0, 15, 0, 5)
-EmptyPlayerBar.Size = UDim2.new(0, 138, 0, 35)
+EmptyPlayerBar.Size = UDim2.new(0, 150, 0, 35)
 EmptyPlayerBar.Visible = false
 
 Headshot.Name = "Headshot"
 Headshot.Parent = EmptyPlayerBar
 Headshot.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Headshot.BackgroundTransparency = 1.000
-Headshot.Position = UDim2.new(0, 5, 0, 5)
+Headshot.Position = UDim2.new(0, 15, 0, 5)
 Headshot.Size = UDim2.new(0, 25, 0, 25)
 Headshot.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
 
@@ -134,17 +137,18 @@ NameButton.Name = "NameButton"
 NameButton.Parent = EmptyPlayerBar
 NameButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 NameButton.BackgroundTransparency = 1.000
-NameButton.Position = UDim2.new(0, 35, 0, 5)
-NameButton.Size = UDim2.new(0, 98, 0, 25)
+NameButton.Position = UDim2.new(0, 45, 0, 5)
+NameButton.Size = UDim2.new(0, 100, 0, 25)
 NameButton.Font = Enum.Font.Code
 NameButton.Text = "Player_Name"
 NameButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 NameButton.TextSize = 14.000
+NameButton.TextXAlignment = Enum.TextXAlignment.Left
 
 RefreshButton.Name = "RefreshButton"
 RefreshButton.Parent = MainWindow
 RefreshButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-RefreshButton.BackgroundTransparency = 0.750
+RefreshButton.BackgroundTransparency = 1.000
 RefreshButton.Position = UDim2.new(0, 155, 0, 370)
 RefreshButton.Size = UDim2.new(0, 25, 0, 25)
 RefreshButton.Image = "http://www.roblox.com/asset/?id=10629627128"
@@ -162,24 +166,23 @@ Headshot_2.Parent = TargetPlayer
 Headshot_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Headshot_2.BackgroundTransparency = 0.750
 Headshot_2.BorderSizePixel = 0
-Headshot_2.Position = UDim2.new(0, 5, 0, 5)
-Headshot_2.Size = UDim2.new(0, 145, 0, 145)
+Headshot_2.Size = UDim2.new(0, 150, 0, 150)
 
 Bodyshot.Name = "Bodyshot"
 Bodyshot.Parent = TargetPlayer
 Bodyshot.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Bodyshot.BackgroundTransparency = 0.750
 Bodyshot.BorderSizePixel = 0
-Bodyshot.Position = UDim2.new(0, 150, 0, 5)
-Bodyshot.Size = UDim2.new(0, 145, 0, 145)
+Bodyshot.Position = UDim2.new(0, 150, 0, 0)
+Bodyshot.Size = UDim2.new(0, 150, 0, 150)
 
 PlayerInfo.Name = "PlayerInfo"
 PlayerInfo.Parent = TargetPlayer
 PlayerInfo.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 PlayerInfo.BackgroundTransparency = 0.750
 PlayerInfo.BorderSizePixel = 0
-PlayerInfo.Position = UDim2.new(0, 5, 0, 155)
-PlayerInfo.Size = UDim2.new(0, 290, 0, 105)
+PlayerInfo.Position = UDim2.new(0, 0, 0, 155)
+PlayerInfo.Size = UDim2.new(0, 300, 0, 105)
 
 PlayerName.Name = "PlayerName"
 PlayerName.Parent = PlayerInfo
@@ -307,19 +310,31 @@ SnapCameraButton.Parent = TargetPlayer
 SnapCameraButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 SnapCameraButton.BackgroundTransparency = 0.750
 SnapCameraButton.BorderSizePixel = 0
-SnapCameraButton.Position = UDim2.new(0, 5, 0, 285)
-SnapCameraButton.Size = UDim2.new(0, 290, 0, 20)
+SnapCameraButton.Position = UDim2.new(0, 0, 0, 290)
+SnapCameraButton.Size = UDim2.new(0, 300, 0, 20)
 SnapCameraButton.Font = Enum.Font.Code
 SnapCameraButton.Text = "Snap Camera To Player"
 SnapCameraButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 SnapCameraButton.TextSize = 14.000
+
+GlueCameraButton.Name = "GlueCameraButton"
+GlueCameraButton.Parent = TargetPlayer
+GlueCameraButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+GlueCameraButton.BackgroundTransparency = 0.750
+GlueCameraButton.BorderSizePixel = 0
+GlueCameraButton.Position = UDim2.new(0, 0, 0, 265)
+GlueCameraButton.Size = UDim2.new(0, 300, 0, 20)
+GlueCameraButton.Font = Enum.Font.Code
+GlueCameraButton.Text = "Glue Camera To Player"
+GlueCameraButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+GlueCameraButton.TextSize = 14.000
 
 RefreshHint.Name = "RefreshHint"
 RefreshHint.Parent = MainWindow
 RefreshHint.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 RefreshHint.BackgroundTransparency = 1.000
 RefreshHint.BorderSizePixel = 0
-RefreshHint.Position = UDim2.new(0, 185, 0, 380)
+RefreshHint.Position = UDim2.new(0, 185, 0, 370)
 RefreshHint.Size = UDim2.new(0, 120, 0, 15)
 RefreshHint.Font = Enum.Font.Code
 RefreshHint.Text = "<- Refresh Player List"
