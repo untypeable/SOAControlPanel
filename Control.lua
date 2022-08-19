@@ -51,9 +51,6 @@ local function UpdatePlayerList()
 	
 	local YPos = 0
 	for Index, Player in pairs(game:GetService("Players"):GetPlayers()) do
-		if Index == 1 then
-			SetTargetPlayer(Player)
-		end
 		local PlayerBar = ControlPanel.MainWindow.PlayerList.EmptyPlayerBar:Clone()
 		coroutine.resume(coroutine.create(function()
 			local Image, Ready = game:GetService("Players"):GetUserThumbnailAsync(Player.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size60x60)
