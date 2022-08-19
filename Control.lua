@@ -3,14 +3,21 @@ local ControlPanel = game:GetService("Players").LocalPlayer.PlayerGui:WaitForChi
 ControlPanel.MainWindow.Active = true
 ControlPanel.MainWindow.Draggable = true
 
+_G.GluecamEnabled = false
+_G.FreecamEnabled = false
+_G.CameraMovePos = CFrame.new().Position
+_G.CameraMovePending = false
+
 local TargetPlayer = game:GetService("Players").LocalPlayer
 
 local function SetTargetPlayer(Player)
 	TargetPlayer = Player
-	local Headshot, HReady = game:GetService("Players"):GetUserThumbnailAsync(Player.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size150x150)
-	local Bodyshot, BReady = game:GetService("Players"):GetUserThumbnailAsync(Player.UserId, Enum.ThumbnailType.AvatarThumbnail, Enum.ThumbnailSize.Size150x150)
-	ControlPanel.MainWindow.TargetPlayer.Headshot.Image = Headshot
-	ControlPanel.MainWindow.TargetPlayer.Bodyshot.Image = Bodyshot
+	coroutine.resume(coroutine.create(function()
+		local Headshot, HReady = game:GetService("Players"):GetUserThumbnailAsync(Player.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size150x150)
+		local Bodyshot, BReady = game:GetService("Players"):GetUserThumbnailAsync(Player.UserId, Enum.ThumbnailType.AvatarThumbnail, Enum.ThumbnailSize.Size150x150)
+		ControlPanel.MainWindow.TargetPlayer.Headshot.Image = Headshot
+		ControlPanel.MainWindow.TargetPlayer.Bodyshot.Image = Bodyshot	
+	end))
 	ControlPanel.MainWindow.TargetPlayer.PlayerInfo.PlayerName.Value.Text = Player.Name
 	ControlPanel.MainWindow.TargetPlayer.PlayerInfo.PlayerId.Value.Text = tostring(Player.UserId)
 	local AgeYears = 0
@@ -42,18 +49,20 @@ local function UpdatePlayerList()
 		end
 	end
 	
-	local YPos = 5
+	local YPos = 0
 	for Index, Player in pairs(game:GetService("Players"):GetPlayers()) do
 		if Index == 1 then
 			SetTargetPlayer(Player)
 		end
-		local Image, Ready = game:GetService("Players"):GetUserThumbnailAsync(Player.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size60x60)
 		local PlayerBar = ControlPanel.MainWindow.PlayerList.EmptyPlayerBar:Clone()
+		coroutine.resume(coroutine.create(function()
+			local Image, Ready = game:GetService("Players"):GetUserThumbnailAsync(Player.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size60x60)
+			PlayerBar.Headshot.Image = Image
+		end))
 		PlayerBar.Name = "PlayerBar"
 		PlayerBar.Parent = ControlPanel.MainWindow.PlayerList
-		PlayerBar.Headshot.Image = Image
 		PlayerBar.NameButton.Text = Player.Name
-		PlayerBar.Position = UDim2.new(0, 15, 0, YPos);
+		PlayerBar.Position = UDim2.new(0, 10, 0, YPos);
 		PlayerBar.Visible = true
 		YPos += 40
 		PlayerBar.NameButton.MouseButton1Click:Connect(function()
@@ -83,6 +92,17 @@ ControlPanel.MainWindow.TargetPlayer.SnapCameraButton.MouseButton1Click:Connect(
 	if _G.FreecamEnabled == true then
 		_G.CameraMovePos = TargetPlayer.Character.Head.CFrame.Position
 		_G.CameraMovePending = true
+	end
+end)
+
+ControlPanel.MainWindow.TargetPlayer.GlueCameraButton.MouseButton1Click:Connect(function()
+	if _G.GluecamEnabled == false then
+		_G.GluecamTarget = TargetPlayer
+		_G.GluecamEnabled = true
+		ControlPanel.MainWindow.TargetPlayer.GlueCameraButton.Text = "UnGlue Camera From Player"
+	else
+		_G.GluecamEnabled = false
+		ControlPanel.MainWindow.TargetPlayer.GlueCameraButton.Text = "Glue Camera To Player"
 	end
 end)
 
