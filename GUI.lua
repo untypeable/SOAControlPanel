@@ -1,355 +1,507 @@
--- Gui to Lua
--- Version: 3.2
-
--- Instances:
-
-local ControlPanel = Instance.new("ScreenGui")
-local MainWindow = Instance.new("Frame")
-local Header = Instance.new("Frame")
-local Title = Instance.new("TextLabel")
-local Owner = Instance.new("TextLabel")
-local ExitButton = Instance.new("TextButton")
-local MinimizeButton = Instance.new("TextButton")
+local SOA = Instance.new("ScreenGui")
+local Main = Instance.new("Frame")
+local Header = Instance.new("TextLabel")
+local Nav = Instance.new("Frame")
+local Players = Instance.new("TextButton")
+local Looting = Instance.new("TextButton")
+local Players_2 = Instance.new("Frame")
 local PlayerList = Instance.new("ScrollingFrame")
-local EmptyPlayerBar = Instance.new("Frame")
-local Headshot = Instance.new("ImageLabel")
-local NameButton = Instance.new("TextButton")
-local RefreshButton = Instance.new("ImageButton")
-local TargetPlayer = Instance.new("Frame")
-local Headshot_2 = Instance.new("ImageLabel")
-local Bodyshot = Instance.new("ImageLabel")
-local PlayerInfo = Instance.new("Frame")
-local PlayerName = Instance.new("Folder")
-local Value = Instance.new("TextBox")
-local Info = Instance.new("TextLabel")
-local PlayerId = Instance.new("Folder")
-local Value_2 = Instance.new("TextBox")
-local Info_2 = Instance.new("TextLabel")
-local AccountAge = Instance.new("Folder")
-local Value_3 = Instance.new("TextBox")
-local Info_3 = Instance.new("TextLabel")
-local IsAdmin = Instance.new("Folder")
-local Value_4 = Instance.new("TextBox")
-local Info_4 = Instance.new("TextLabel")
-local SnapCameraButton = Instance.new("TextButton")
-local GlueCameraButton = Instance.new("TextButton")
-local RefreshHint = Instance.new("TextLabel")
-local PanelButton = Instance.new("TextButton")
+local PlayerEntry = Instance.new("TextButton")
+local AvatarImg = Instance.new("ImageLabel")
+local Username = Instance.new("Folder")
+local TextLabel = Instance.new("TextLabel")
+local TextBox = Instance.new("TextBox")
+local UserId = Instance.new("Folder")
+local TextLabel_2 = Instance.new("TextLabel")
+local TextBox_2 = Instance.new("TextBox")
+local Nickname = Instance.new("Folder")
+local TextLabel_3 = Instance.new("TextLabel")
+local TextBox_3 = Instance.new("TextBox")
+local Gun = Instance.new("Folder")
+local TextLabel_4 = Instance.new("TextLabel")
+local TextBox_4 = Instance.new("TextBox")
+local UserPos = Instance.new("Folder")
+local TextLabel_5 = Instance.new("TextLabel")
+local TextBox_5 = Instance.new("TextBox")
+local Velocity = Instance.new("Folder")
+local TextLabel_6 = Instance.new("TextLabel")
+local TextBox_6 = Instance.new("TextBox")
+local ExitButton = Instance.new("TextButton")
+local MinButton = Instance.new("TextButton")
+local Looting_2 = Instance.new("Frame")
+local Bodies = Instance.new("Folder")
+local ScrollingFrame = Instance.new("ScrollingFrame")
+local TextLabel_7 = Instance.new("TextLabel")
+local TextButton = Instance.new("TextButton")
+local Airdrops = Instance.new("Folder")
+local ScrollingFrame_2 = Instance.new("ScrollingFrame")
+local TextLabel_8 = Instance.new("TextLabel")
+local TextButton_2 = Instance.new("TextButton")
+local Boxes = Instance.new("Folder")
+local ScrollingFrame_3 = Instance.new("ScrollingFrame")
+local TextLabel_9 = Instance.new("TextLabel")
+local TextButton_3 = Instance.new("TextButton")
+local Foodstuffs = Instance.new("Folder")
+local ScrollingFrame_4 = Instance.new("ScrollingFrame")
+local TextLabel_10 = Instance.new("TextLabel")
+local TextButton_4 = Instance.new("TextButton")
 
 --Properties:
 
-ControlPanel.Name = "ControlPanel"
-ControlPanel.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-ControlPanel.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+SOA.Name = "SOA"
+SOA.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+SOA.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-MainWindow.Name = "MainWindow"
-MainWindow.Parent = ControlPanel
-MainWindow.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-MainWindow.BackgroundTransparency = 0.750
-MainWindow.Position = UDim2.new(0.280923992, 0, 0.248266295, 0)
-MainWindow.Size = UDim2.new(0, 800, 0, 400)
+Main.Name = "Main"
+Main.Parent = SOA
+Main.Active = true
+Main.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+Main.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Main.BorderSizePixel = 0
+Main.Position = UDim2.new(0.140706599, 0, 0.129175901, 0)
+Main.Size = UDim2.new(0, 800, 0, 400)
 
 Header.Name = "Header"
-Header.Parent = MainWindow
-Header.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Header.BackgroundTransparency = 0.750
+Header.Parent = Main
+Header.BackgroundColor3 = Color3.fromRGB(170, 85, 255)
 Header.BorderSizePixel = 0
-Header.Size = UDim2.new(0, 800, 0, 50)
+Header.Size = UDim2.new(0, 800, 0, 25)
+Header.Font = Enum.Font.SourceSans
+Header.Text = "State of Anarchy"
+Header.TextColor3 = Color3.fromRGB(255, 255, 255)
+Header.TextSize = 14.000
 
-Title.Name = "Title"
-Title.Parent = Header
-Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Title.BackgroundTransparency = 1.000
-Title.Position = UDim2.new(0, 5, 0, 0)
-Title.Size = UDim2.new(0, 176, 0, 50)
-Title.Font = Enum.Font.Code
-Title.Text = "SOA Control Panel"
-Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-Title.TextSize = 20.000
-Title.TextXAlignment = Enum.TextXAlignment.Left
+Nav.Name = "Nav"
+Nav.Parent = Main
+Nav.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+Nav.BorderSizePixel = 0
+Nav.Position = UDim2.new(0, 0, 0.0625, 0)
+Nav.Size = UDim2.new(0, 800, 0, 20)
 
-Owner.Name = "Owner"
-Owner.Parent = Header
-Owner.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Owner.BackgroundTransparency = 1.000
-Owner.Position = UDim2.new(0.75, 0, 0.600000024, 0)
-Owner.Size = UDim2.new(0, 200, 0, 20)
-Owner.Font = Enum.Font.Code
-Owner.Text = "parkinsons"
-Owner.TextColor3 = Color3.fromRGB(255, 255, 255)
-Owner.TextSize = 14.000
-Owner.TextXAlignment = Enum.TextXAlignment.Right
-Owner.TextYAlignment = Enum.TextYAlignment.Bottom
+Players.Name = "Players"
+Players.Parent = Nav
+Players.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+Players.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Players.BorderSizePixel = 0
+Players.Size = UDim2.new(0, 100, 0, 20)
+Players.Font = Enum.Font.SourceSans
+Players.Text = "Players"
+Players.TextColor3 = Color3.fromRGB(255, 255, 255)
+Players.TextSize = 14.000
 
-ExitButton.Name = "ExitButton"
-ExitButton.Parent = Header
-ExitButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-ExitButton.BackgroundTransparency = 0.750
-ExitButton.Position = UDim2.new(0, 770, 0, 5)
-ExitButton.Size = UDim2.new(0, 25, 0, 25)
-ExitButton.Font = Enum.Font.Code
-ExitButton.Text = "X"
-ExitButton.TextColor3 = Color3.fromRGB(255, 0, 0)
-ExitButton.TextSize = 14.000
+Looting.Name = "Looting"
+Looting.Parent = Nav
+Looting.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+Looting.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Looting.BorderSizePixel = 0
+Looting.Position = UDim2.new(0.125, 0, 0, 0)
+Looting.Size = UDim2.new(0, 100, 0, 20)
+Looting.Font = Enum.Font.SourceSans
+Looting.Text = "Looting"
+Looting.TextColor3 = Color3.fromRGB(255, 255, 255)
+Looting.TextSize = 14.000
 
-MinimizeButton.Name = "MinimizeButton"
-MinimizeButton.Parent = Header
-MinimizeButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-MinimizeButton.BackgroundTransparency = 0.750
-MinimizeButton.Position = UDim2.new(0, 740, 0, 5)
-MinimizeButton.Size = UDim2.new(0, 25, 0, 25)
-MinimizeButton.Font = Enum.Font.Code
-MinimizeButton.Text = "_"
-MinimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-MinimizeButton.TextSize = 14.000
+Players_2.Name = "Players"
+Players_2.Parent = Main
+Players_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Players_2.BackgroundTransparency = 1.000
+Players_2.BorderSizePixel = 0
+Players_2.Position = UDim2.new(0, 0, 0, 45)
+Players_2.Size = UDim2.new(0, 800, 0, 355)
+Players_2.Visible = false
 
 PlayerList.Name = "PlayerList"
-PlayerList.Parent = MainWindow
+PlayerList.Parent = Players_2
 PlayerList.Active = true
-PlayerList.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-PlayerList.BackgroundTransparency = 0.750
-PlayerList.BorderSizePixel = 0
-PlayerList.Position = UDim2.new(0, 0, 0, 55)
-PlayerList.Size = UDim2.new(0, 150, 0, 345)
-PlayerList.BottomImage = "http://www.roblox.com/asset/?id=1980467285"
-PlayerList.MidImage = "http://www.roblox.com/asset/?id=1980354550"
-PlayerList.ScrollBarThickness = 10
-PlayerList.TopImage = "http://www.roblox.com/asset/?id=1980467285"
-PlayerList.VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Left
+PlayerList.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+PlayerList.BorderColor3 = Color3.fromRGB(50, 50, 50)
+PlayerList.Position = UDim2.new(0, 599, 0, 1)
+PlayerList.Size = UDim2.new(0, 200, 0, 353)
+PlayerList.BottomImage = ""
+PlayerList.TopImage = ""
 
-EmptyPlayerBar.Name = "EmptyPlayerBar"
-EmptyPlayerBar.Parent = PlayerList
-EmptyPlayerBar.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-EmptyPlayerBar.BackgroundTransparency = 0.750
-EmptyPlayerBar.BorderSizePixel = 0
-EmptyPlayerBar.Size = UDim2.new(0, 150, 0, 35)
-EmptyPlayerBar.Visible = false
+PlayerEntry.Name = "PlayerEntry"
+PlayerEntry.Parent = PlayerList
+PlayerEntry.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+PlayerEntry.BorderColor3 = Color3.fromRGB(50, 50, 50)
+PlayerEntry.Size = UDim2.new(0, 200, 0, 30)
+PlayerEntry.Font = Enum.Font.SourceSans
+PlayerEntry.Text = "  Player_Name"
+PlayerEntry.TextColor3 = Color3.fromRGB(255, 255, 255)
+PlayerEntry.TextSize = 14.000
+PlayerEntry.TextXAlignment = Enum.TextXAlignment.Left
 
-Headshot.Name = "Headshot"
-Headshot.Parent = EmptyPlayerBar
-Headshot.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Headshot.BackgroundTransparency = 1.000
-Headshot.Position = UDim2.new(0, 15, 0, 5)
-Headshot.Size = UDim2.new(0, 25, 0, 25)
-Headshot.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
+AvatarImg.Name = "AvatarImg"
+AvatarImg.Parent = Players_2
+AvatarImg.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+AvatarImg.BackgroundTransparency = 1.000
+AvatarImg.Position = UDim2.new(0, 10, 0, 10)
+AvatarImg.Size = UDim2.new(0, 200, 0, 200)
+AvatarImg.Image = "http://www.roblox.com/asset/?id=8073107221"
 
-NameButton.Name = "NameButton"
-NameButton.Parent = EmptyPlayerBar
-NameButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-NameButton.BackgroundTransparency = 1.000
-NameButton.Position = UDim2.new(0, 45, 0, 5)
-NameButton.Size = UDim2.new(0, 100, 0, 25)
-NameButton.Font = Enum.Font.Code
-NameButton.Text = "Player_Name"
-NameButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-NameButton.TextSize = 14.000
-NameButton.TextXAlignment = Enum.TextXAlignment.Left
+Username.Name = "Username"
+Username.Parent = Players_2
 
-RefreshButton.Name = "RefreshButton"
-RefreshButton.Parent = MainWindow
-RefreshButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-RefreshButton.BackgroundTransparency = 1.000
-RefreshButton.Position = UDim2.new(0, 155, 0, 370)
-RefreshButton.Size = UDim2.new(0, 25, 0, 25)
-RefreshButton.Image = "http://www.roblox.com/asset/?id=10629627128"
+TextLabel.Parent = Username
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.Position = UDim2.new(0, 220, 0, 10)
+TextLabel.Size = UDim2.new(0, 175, 0, 18)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "Username"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextSize = 14.000
+TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+TextLabel.TextYAlignment = Enum.TextYAlignment.Bottom
 
-TargetPlayer.Name = "TargetPlayer"
-TargetPlayer.Parent = MainWindow
-TargetPlayer.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-TargetPlayer.BackgroundTransparency = 0.750
-TargetPlayer.BorderSizePixel = 0
-TargetPlayer.Position = UDim2.new(0, 155, 0, 55)
-TargetPlayer.Size = UDim2.new(0, 300, 0, 310)
+TextBox.Parent = Username
+TextBox.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+TextBox.Position = UDim2.new(0, 220, 0, 30)
+TextBox.Size = UDim2.new(0, 175, 0, 20)
+TextBox.ClearTextOnFocus = false
+TextBox.Font = Enum.Font.SourceSans
+TextBox.Text = ""
+TextBox.TextColor3 = Color3.fromRGB(200, 200, 200)
+TextBox.TextSize = 14.000
 
-Headshot_2.Name = "Headshot"
-Headshot_2.Parent = TargetPlayer
-Headshot_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Headshot_2.BackgroundTransparency = 0.750
-Headshot_2.BorderSizePixel = 0
-Headshot_2.Size = UDim2.new(0, 150, 0, 150)
+UserId.Name = "UserId"
+UserId.Parent = Players_2
 
-Bodyshot.Name = "Bodyshot"
-Bodyshot.Parent = TargetPlayer
-Bodyshot.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Bodyshot.BackgroundTransparency = 0.750
-Bodyshot.BorderSizePixel = 0
-Bodyshot.Position = UDim2.new(0, 150, 0, 0)
-Bodyshot.Size = UDim2.new(0, 150, 0, 150)
+TextLabel_2.Parent = UserId
+TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.BackgroundTransparency = 1.000
+TextLabel_2.Position = UDim2.new(0, 220, 0, 50)
+TextLabel_2.Size = UDim2.new(0, 175, 0, 18)
+TextLabel_2.Font = Enum.Font.SourceSans
+TextLabel_2.Text = "User Id"
+TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.TextSize = 14.000
+TextLabel_2.TextXAlignment = Enum.TextXAlignment.Left
+TextLabel_2.TextYAlignment = Enum.TextYAlignment.Bottom
 
-PlayerInfo.Name = "PlayerInfo"
-PlayerInfo.Parent = TargetPlayer
-PlayerInfo.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-PlayerInfo.BackgroundTransparency = 0.750
-PlayerInfo.BorderSizePixel = 0
-PlayerInfo.Position = UDim2.new(0, 0, 0, 155)
-PlayerInfo.Size = UDim2.new(0, 300, 0, 105)
+TextBox_2.Parent = UserId
+TextBox_2.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+TextBox_2.Position = UDim2.new(0, 220, 0, 70)
+TextBox_2.Size = UDim2.new(0, 175, 0, 20)
+TextBox_2.ClearTextOnFocus = false
+TextBox_2.Font = Enum.Font.SourceSans
+TextBox_2.Text = ""
+TextBox_2.TextColor3 = Color3.fromRGB(200, 200, 200)
+TextBox_2.TextSize = 14.000
 
-PlayerName.Name = "PlayerName"
-PlayerName.Parent = PlayerInfo
+Nickname.Name = "Nickname"
+Nickname.Parent = Players_2
 
-Value.Name = "Value"
-Value.Parent = PlayerName
-Value.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Value.BackgroundTransparency = 1.000
-Value.BorderSizePixel = 0
-Value.Position = UDim2.new(0, 105, 0, 5)
-Value.Size = UDim2.new(0, 180, 0, 20)
-Value.ClearTextOnFocus = false
-Value.Font = Enum.Font.Code
-Value.ShowNativeInput = false
-Value.Text = "Player_Name"
-Value.TextColor3 = Color3.fromRGB(255, 255, 255)
-Value.TextSize = 14.000
-Value.TextXAlignment = Enum.TextXAlignment.Right
+TextLabel_3.Parent = Nickname
+TextLabel_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_3.BackgroundTransparency = 1.000
+TextLabel_3.Position = UDim2.new(0, 220, 0, 90)
+TextLabel_3.Size = UDim2.new(0, 175, 0, 18)
+TextLabel_3.Font = Enum.Font.SourceSans
+TextLabel_3.Text = "Nickname"
+TextLabel_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_3.TextSize = 14.000
+TextLabel_3.TextXAlignment = Enum.TextXAlignment.Left
+TextLabel_3.TextYAlignment = Enum.TextYAlignment.Bottom
 
-Info.Name = "Info"
-Info.Parent = PlayerName
-Info.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Info.BackgroundTransparency = 1.000
-Info.BorderSizePixel = 0
-Info.Position = UDim2.new(0, 5, 0, 5)
-Info.Size = UDim2.new(0, 100, 0, 20)
-Info.Font = Enum.Font.Code
-Info.Text = "Player Name ->"
-Info.TextColor3 = Color3.fromRGB(255, 255, 255)
-Info.TextSize = 14.000
-Info.TextXAlignment = Enum.TextXAlignment.Left
+TextBox_3.Parent = Nickname
+TextBox_3.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+TextBox_3.Position = UDim2.new(0, 220, 0, 110)
+TextBox_3.Size = UDim2.new(0, 175, 0, 20)
+TextBox_3.ClearTextOnFocus = false
+TextBox_3.Font = Enum.Font.SourceSans
+TextBox_3.Text = ""
+TextBox_3.TextColor3 = Color3.fromRGB(200, 200, 200)
+TextBox_3.TextSize = 14.000
 
-PlayerId.Name = "PlayerId"
-PlayerId.Parent = PlayerInfo
+Gun.Name = "Gun"
+Gun.Parent = Players_2
 
-Value_2.Name = "Value"
-Value_2.Parent = PlayerId
-Value_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Value_2.BackgroundTransparency = 1.000
-Value_2.BorderSizePixel = 0
-Value_2.Position = UDim2.new(0, 105, 0, 30)
-Value_2.Size = UDim2.new(0, 180, 0, 20)
-Value_2.ClearTextOnFocus = false
-Value_2.Font = Enum.Font.Code
-Value_2.Text = "000000"
-Value_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-Value_2.TextSize = 14.000
-Value_2.TextXAlignment = Enum.TextXAlignment.Right
+TextLabel_4.Parent = Gun
+TextLabel_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_4.BackgroundTransparency = 1.000
+TextLabel_4.Position = UDim2.new(0, 220, 0, 130)
+TextLabel_4.Size = UDim2.new(0, 175, 0, 18)
+TextLabel_4.Font = Enum.Font.SourceSans
+TextLabel_4.Text = "Equipped Gun"
+TextLabel_4.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_4.TextSize = 14.000
+TextLabel_4.TextXAlignment = Enum.TextXAlignment.Left
+TextLabel_4.TextYAlignment = Enum.TextYAlignment.Bottom
 
-Info_2.Name = "Info"
-Info_2.Parent = PlayerId
-Info_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Info_2.BackgroundTransparency = 1.000
-Info_2.BorderSizePixel = 0
-Info_2.Position = UDim2.new(0, 5, 0, 30)
-Info_2.Size = UDim2.new(0, 100, 0, 20)
-Info_2.Font = Enum.Font.Code
-Info_2.Text = "Player Id ->"
-Info_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-Info_2.TextSize = 14.000
-Info_2.TextXAlignment = Enum.TextXAlignment.Left
+TextBox_4.Parent = Gun
+TextBox_4.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+TextBox_4.Position = UDim2.new(0, 220, 0, 150)
+TextBox_4.Size = UDim2.new(0, 175, 0, 20)
+TextBox_4.ClearTextOnFocus = false
+TextBox_4.Font = Enum.Font.SourceSans
+TextBox_4.Text = ""
+TextBox_4.TextColor3 = Color3.fromRGB(200, 200, 200)
+TextBox_4.TextSize = 14.000
 
-AccountAge.Name = "AccountAge"
-AccountAge.Parent = PlayerInfo
+UserPos.Name = "UserPos"
+UserPos.Parent = Players_2
 
-Value_3.Name = "Value"
-Value_3.Parent = AccountAge
-Value_3.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Value_3.BackgroundTransparency = 1.000
-Value_3.BorderSizePixel = 5
-Value_3.Position = UDim2.new(0, 105, 0, 55)
-Value_3.Size = UDim2.new(0, 180, 0, 20)
-Value_3.ClearTextOnFocus = false
-Value_3.Font = Enum.Font.Code
-Value_3.Text = "0 days"
-Value_3.TextColor3 = Color3.fromRGB(255, 255, 255)
-Value_3.TextSize = 14.000
-Value_3.TextXAlignment = Enum.TextXAlignment.Right
+TextLabel_5.Parent = UserPos
+TextLabel_5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_5.BackgroundTransparency = 1.000
+TextLabel_5.Position = UDim2.new(0, 405, 0, 10)
+TextLabel_5.Size = UDim2.new(0, 175, 0, 18)
+TextLabel_5.Font = Enum.Font.SourceSans
+TextLabel_5.Text = "Position"
+TextLabel_5.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_5.TextSize = 14.000
+TextLabel_5.TextXAlignment = Enum.TextXAlignment.Left
+TextLabel_5.TextYAlignment = Enum.TextYAlignment.Bottom
 
-Info_3.Name = "Info"
-Info_3.Parent = AccountAge
-Info_3.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Info_3.BackgroundTransparency = 1.000
-Info_3.BorderSizePixel = 0
-Info_3.Position = UDim2.new(0, 5, 0, 55)
-Info_3.Size = UDim2.new(0, 100, 0, 20)
-Info_3.Font = Enum.Font.Code
-Info_3.Text = "Account Age ->"
-Info_3.TextColor3 = Color3.fromRGB(255, 255, 255)
-Info_3.TextSize = 14.000
-Info_3.TextXAlignment = Enum.TextXAlignment.Left
+TextBox_5.Parent = UserPos
+TextBox_5.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+TextBox_5.Position = UDim2.new(0, 405, 0, 30)
+TextBox_5.Size = UDim2.new(0, 175, 0, 20)
+TextBox_5.ClearTextOnFocus = false
+TextBox_5.Font = Enum.Font.SourceSans
+TextBox_5.Text = ""
+TextBox_5.TextColor3 = Color3.fromRGB(200, 200, 200)
+TextBox_5.TextSize = 14.000
 
-IsAdmin.Name = "IsAdmin"
-IsAdmin.Parent = PlayerInfo
+Velocity.Name = "Velocity"
+Velocity.Parent = Players_2
 
-Value_4.Name = "Value"
-Value_4.Parent = IsAdmin
-Value_4.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Value_4.BackgroundTransparency = 1.000
-Value_4.BorderSizePixel = 5
-Value_4.Position = UDim2.new(0, 105, 0, 80)
-Value_4.Size = UDim2.new(0, 180, 0, 20)
-Value_4.ClearTextOnFocus = false
-Value_4.Font = Enum.Font.Code
-Value_4.Text = "False"
-Value_4.TextColor3 = Color3.fromRGB(255, 255, 255)
-Value_4.TextSize = 14.000
-Value_4.TextXAlignment = Enum.TextXAlignment.Right
+TextLabel_6.Parent = Velocity
+TextLabel_6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_6.BackgroundTransparency = 1.000
+TextLabel_6.Position = UDim2.new(0, 405, 0, 50)
+TextLabel_6.Size = UDim2.new(0, 175, 0, 18)
+TextLabel_6.Font = Enum.Font.SourceSans
+TextLabel_6.Text = "Velocity"
+TextLabel_6.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_6.TextSize = 14.000
+TextLabel_6.TextXAlignment = Enum.TextXAlignment.Left
+TextLabel_6.TextYAlignment = Enum.TextYAlignment.Bottom
 
-Info_4.Name = "Info"
-Info_4.Parent = IsAdmin
-Info_4.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Info_4.BackgroundTransparency = 1.000
-Info_4.BorderSizePixel = 0
-Info_4.Position = UDim2.new(0, 5, 0, 80)
-Info_4.Size = UDim2.new(0, 100, 0, 20)
-Info_4.Font = Enum.Font.Code
-Info_4.Text = "Is Admin / Mod ->"
-Info_4.TextColor3 = Color3.fromRGB(255, 255, 255)
-Info_4.TextSize = 14.000
-Info_4.TextXAlignment = Enum.TextXAlignment.Left
+TextBox_6.Parent = Velocity
+TextBox_6.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+TextBox_6.Position = UDim2.new(0, 405, 0, 70)
+TextBox_6.Size = UDim2.new(0, 175, 0, 20)
+TextBox_6.ClearTextOnFocus = false
+TextBox_6.Font = Enum.Font.SourceSans
+TextBox_6.Text = ""
+TextBox_6.TextColor3 = Color3.fromRGB(200, 200, 200)
+TextBox_6.TextSize = 14.000
 
-SnapCameraButton.Name = "SnapCameraButton"
-SnapCameraButton.Parent = TargetPlayer
-SnapCameraButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-SnapCameraButton.BackgroundTransparency = 0.750
-SnapCameraButton.BorderSizePixel = 0
-SnapCameraButton.Position = UDim2.new(0, 0, 0, 290)
-SnapCameraButton.Size = UDim2.new(0, 300, 0, 20)
-SnapCameraButton.Font = Enum.Font.Code
-SnapCameraButton.Text = "Snap Camera To Player"
-SnapCameraButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-SnapCameraButton.TextSize = 14.000
+ExitButton.Name = "ExitButton"
+ExitButton.Parent = Main
+ExitButton.BackgroundColor3 = Color3.fromRGB(170, 85, 255)
+ExitButton.BorderColor3 = Color3.fromRGB(255, 255, 255)
+ExitButton.BorderSizePixel = 0
+ExitButton.Position = UDim2.new(0, 775, 0, 0)
+ExitButton.Size = UDim2.new(0, 25, 0, 25)
+ExitButton.Font = Enum.Font.Jura
+ExitButton.Text = "X"
+ExitButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ExitButton.TextSize = 18.000
+ExitButton.TextWrapped = true
 
-GlueCameraButton.Name = "GlueCameraButton"
-GlueCameraButton.Parent = TargetPlayer
-GlueCameraButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-GlueCameraButton.BackgroundTransparency = 0.750
-GlueCameraButton.BorderSizePixel = 0
-GlueCameraButton.Position = UDim2.new(0, 0, 0, 265)
-GlueCameraButton.Size = UDim2.new(0, 300, 0, 20)
-GlueCameraButton.Font = Enum.Font.Code
-GlueCameraButton.Text = "Glue Camera To Player"
-GlueCameraButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-GlueCameraButton.TextSize = 14.000
+MinButton.Name = "MinButton"
+MinButton.Parent = Main
+MinButton.BackgroundColor3 = Color3.fromRGB(170, 85, 255)
+MinButton.BorderColor3 = Color3.fromRGB(255, 255, 255)
+MinButton.BorderSizePixel = 0
+MinButton.Position = UDim2.new(0, 750, 0, 0)
+MinButton.Size = UDim2.new(0, 25, 0, 25)
+MinButton.Font = Enum.Font.Jura
+MinButton.Text = "-"
+MinButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+MinButton.TextScaled = true
+MinButton.TextSize = 14.000
+MinButton.TextWrapped = true
 
-RefreshHint.Name = "RefreshHint"
-RefreshHint.Parent = MainWindow
-RefreshHint.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-RefreshHint.BackgroundTransparency = 1.000
-RefreshHint.BorderSizePixel = 0
-RefreshHint.Position = UDim2.new(0, 185, 0, 370)
-RefreshHint.Size = UDim2.new(0, 120, 0, 15)
-RefreshHint.Font = Enum.Font.Code
-RefreshHint.Text = "<- Refresh Player List"
-RefreshHint.TextColor3 = Color3.fromRGB(255, 255, 255)
-RefreshHint.TextSize = 10.000
+Looting_2.Name = "Looting"
+Looting_2.Parent = Main
+Looting_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Looting_2.BackgroundTransparency = 1.000
+Looting_2.BorderSizePixel = 0
+Looting_2.Position = UDim2.new(0, 0, 0, 45)
+Looting_2.Size = UDim2.new(0, 800, 0, 355)
 
-PanelButton.Name = "PanelButton"
-PanelButton.Parent = ControlPanel
-PanelButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-PanelButton.BackgroundTransparency = 0.750
-PanelButton.BorderColor3 = Color3.fromRGB(255, 255, 255)
-PanelButton.Position = UDim2.new(1, -100, 1, -25)
-PanelButton.Size = UDim2.new(0, 100, 0, 25)
-PanelButton.Visible = false
-PanelButton.Font = Enum.Font.Cartoon
-PanelButton.Text = "^ Open Panel"
-PanelButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-PanelButton.TextSize = 14.000
+Bodies.Name = "Bodies"
+Bodies.Parent = Looting_2
+
+ScrollingFrame.Parent = Bodies
+ScrollingFrame.Active = true
+ScrollingFrame.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+ScrollingFrame.BorderColor3 = Color3.fromRGB(27, 42, 53)
+ScrollingFrame.Position = UDim2.new(0, 10, 0, 28)
+ScrollingFrame.Size = UDim2.new(0, 188, 0, 251)
+ScrollingFrame.BottomImage = ""
+ScrollingFrame.TopImage = ""
+
+TextLabel_7.Parent = Bodies
+TextLabel_7.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_7.BackgroundTransparency = 1.000
+TextLabel_7.BorderSizePixel = 0
+TextLabel_7.Position = UDim2.new(0, 10, 0, 8)
+TextLabel_7.Size = UDim2.new(0, 188, 0, 20)
+TextLabel_7.Font = Enum.Font.SourceSans
+TextLabel_7.Text = "Dead Bodies"
+TextLabel_7.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_7.TextSize = 14.000
+
+TextButton.Parent = Bodies
+TextButton.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+TextButton.Position = UDim2.new(0, 10, 0, 284)
+TextButton.Size = UDim2.new(0, 188, 0, 25)
+TextButton.Font = Enum.Font.SourceSans
+TextButton.Text = "Item ESP: Disabled"
+TextButton.TextColor3 = Color3.fromRGB(255, 0, 0)
+TextButton.TextSize = 14.000
+
+Airdrops.Name = "Airdrops"
+Airdrops.Parent = Looting_2
+
+ScrollingFrame_2.Parent = Airdrops
+ScrollingFrame_2.Active = true
+ScrollingFrame_2.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+ScrollingFrame_2.BorderColor3 = Color3.fromRGB(27, 42, 53)
+ScrollingFrame_2.Position = UDim2.new(0, 207, 0, 28)
+ScrollingFrame_2.Size = UDim2.new(0, 188, 0, 251)
+ScrollingFrame_2.BottomImage = ""
+ScrollingFrame_2.TopImage = ""
+
+TextLabel_8.Parent = Airdrops
+TextLabel_8.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_8.BackgroundTransparency = 1.000
+TextLabel_8.BorderSizePixel = 0
+TextLabel_8.Position = UDim2.new(0, 207, 0, 8)
+TextLabel_8.Size = UDim2.new(0, 188, 0, 20)
+TextLabel_8.Font = Enum.Font.SourceSans
+TextLabel_8.Text = "Airdrops"
+TextLabel_8.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_8.TextSize = 14.000
+
+TextButton_2.Parent = Airdrops
+TextButton_2.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+TextButton_2.Position = UDim2.new(0, 207, 0, 284)
+TextButton_2.Size = UDim2.new(0, 188, 0, 25)
+TextButton_2.Font = Enum.Font.SourceSans
+TextButton_2.Text = "Item ESP: Disabled"
+TextButton_2.TextColor3 = Color3.fromRGB(255, 0, 0)
+TextButton_2.TextSize = 14.000
+
+Boxes.Name = "Boxes"
+Boxes.Parent = Looting_2
+
+ScrollingFrame_3.Parent = Boxes
+ScrollingFrame_3.Active = true
+ScrollingFrame_3.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+ScrollingFrame_3.BorderColor3 = Color3.fromRGB(27, 42, 53)
+ScrollingFrame_3.Position = UDim2.new(0, 405, 0, 28)
+ScrollingFrame_3.Size = UDim2.new(0, 188, 0, 251)
+ScrollingFrame_3.BottomImage = ""
+ScrollingFrame_3.TopImage = ""
+
+TextLabel_9.Parent = Boxes
+TextLabel_9.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_9.BackgroundTransparency = 1.000
+TextLabel_9.BorderSizePixel = 0
+TextLabel_9.Position = UDim2.new(0, 405, 0, 8)
+TextLabel_9.Size = UDim2.new(0, 188, 0, 20)
+TextLabel_9.Font = Enum.Font.SourceSans
+TextLabel_9.Text = "Boxes"
+TextLabel_9.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_9.TextSize = 14.000
+
+TextButton_3.Parent = Boxes
+TextButton_3.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+TextButton_3.Position = UDim2.new(0, 405, 0, 284)
+TextButton_3.Size = UDim2.new(0, 188, 0, 25)
+TextButton_3.Font = Enum.Font.SourceSans
+TextButton_3.Text = "Item ESP: Disabled"
+TextButton_3.TextColor3 = Color3.fromRGB(255, 0, 0)
+TextButton_3.TextSize = 14.000
+
+Foodstuffs.Name = "Foodstuffs"
+Foodstuffs.Parent = Looting_2
+
+ScrollingFrame_4.Parent = Foodstuffs
+ScrollingFrame_4.Active = true
+ScrollingFrame_4.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+ScrollingFrame_4.BorderColor3 = Color3.fromRGB(27, 42, 53)
+ScrollingFrame_4.Position = UDim2.new(0, 602, 0, 28)
+ScrollingFrame_4.Size = UDim2.new(0, 188, 0, 251)
+ScrollingFrame_4.BottomImage = ""
+ScrollingFrame_4.TopImage = ""
+
+TextLabel_10.Parent = Foodstuffs
+TextLabel_10.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_10.BackgroundTransparency = 1.000
+TextLabel_10.BorderSizePixel = 0
+TextLabel_10.Position = UDim2.new(0, 602, 0, 8)
+TextLabel_10.Size = UDim2.new(0, 188, 0, 20)
+TextLabel_10.Font = Enum.Font.SourceSans
+TextLabel_10.Text = "Foodstuffs"
+TextLabel_10.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_10.TextSize = 14.000
+
+TextButton_4.Parent = Foodstuffs
+TextButton_4.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+TextButton_4.Position = UDim2.new(0, 602, 0, 284)
+TextButton_4.Size = UDim2.new(0, 188, 0, 25)
+TextButton_4.Font = Enum.Font.SourceSans
+TextButton_4.Text = "Item ESP: Disabled"
+TextButton_4.TextColor3 = Color3.fromRGB(255, 0, 0)
+TextButton_4.TextSize = 14.000
+
+-- Scripts:
+
+local function VPAQ_fake_script() -- SOA.Control 
+	local script = Instance.new('LocalScript', SOA)
+
+	local SOA = script.Parent
+	
+	local PrimaryColor = Color3.new(50 / 255, 50 / 255, 50 / 255)
+	local SecondaryColor = Color3.new(75 / 255, 75 / 255, 75 / 255)
+	
+	SOA.Main.Draggable = true
+	
+	SOA.Main.Nav.Players.MouseButton1Click:Connect(function()
+		SOA.Main.Players.Visible = true
+		SOA.Main.Nav.Players.BackgroundColor3 = PrimaryColor
+		SOA.Main.Looting.Visible = false
+		SOA.Main.Nav.Looting.BackgroundColor3 = SecondaryColor
+	end)
+	
+	SOA.Main.Nav.Looting.MouseButton1Click:Connect(function()
+		SOA.Main.Looting.Visible= true
+		SOA.Main.Nav.Looting.BackgroundColor3 = PrimaryColor
+		SOA.Main.Players.Visible = false
+		SOA.Main.Nav.Players.BackgroundColor3 = SecondaryColor
+	end)
+	
+	SOA.Main.ExitButton.MouseButton1Click:Connect(function()
+		SOA:Destroy()
+	end)
+	
+	SOA.Main.MinButton.MouseButton1Click:Connect(function()
+		if SOA.Main.Size.Y.Offset < 400 then
+			SOA.Main.Players.Visible = true
+			SOA.Main.Nav.Visible = true
+			SOA.Main.Size = UDim2.new(0, 800, 0, 400)
+			SOA.Main.Header.Size = UDim2.new(0, 800, 0, 25)
+			SOA.Main.MinButton.Position = UDim2.new(0, 750, 0, 0)
+			SOA.Main.ExitButton.Position = UDim2.new(0, 775, 0, 0)
+			SOA.Main.MinButton.Rotation = 0
+			SOA.Main.MinButton.Text = "-"
+		else
+			SOA.Main.Players.Visible = false
+			SOA.Main.Nav.Visible = false
+			SOA.Main.Size = UDim2.new(0, 150, 0, 25)
+			SOA.Main.Header.Size = UDim2.new(0, 100, 0, 25)
+			SOA.Main.MinButton.Position = UDim2.new(0, 100, 0, 0)
+			SOA.Main.ExitButton.Position = UDim2.new(0, 125, 0, 0)
+			SOA.Main.MinButton.Rotation = 90
+			SOA.Main.MinButton.Text = ">"
+		end
+	end)
+end
+coroutine.wrap(VPAQ_fake_script)()
