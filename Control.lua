@@ -1,106 +1,59 @@
-local ControlPanel = game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("ControlPanel")
+local PlayerService = game:GetService("Players")
+local GUI = PlayerService.LocalPlayer.PlayerGui:WaitForChild("SOA")
 
-ControlPanel.MainWindow.Active = true
-ControlPanel.MainWindow.Draggable = true
+local PrimaryColor = Color3.new(50 / 255, 50 / 255, 50 / 255)
+local SecondaryColor = Color3.new(75 / 255, 75 / 255, 75 / 255)
 
-_G.GluecamEnabled = false
-_G.FreecamEnabled = false
-_G.CameraMovePos = CFrame.new().Position
-_G.CameraMovePending = false
-
-local TargetPlayer = game:GetService("Players").LocalPlayer
-
-local function SetTargetPlayer(Player)
-	TargetPlayer = Player
-	coroutine.resume(coroutine.create(function()
-		local Headshot, HReady = game:GetService("Players"):GetUserThumbnailAsync(Player.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size150x150)
-		local Bodyshot, BReady = game:GetService("Players"):GetUserThumbnailAsync(Player.UserId, Enum.ThumbnailType.AvatarThumbnail, Enum.ThumbnailSize.Size150x150)
-		ControlPanel.MainWindow.TargetPlayer.Headshot.Image = Headshot
-		ControlPanel.MainWindow.TargetPlayer.Bodyshot.Image = Bodyshot	
-	end))
-	ControlPanel.MainWindow.TargetPlayer.PlayerInfo.PlayerName.Value.Text = Player.Name
-	ControlPanel.MainWindow.TargetPlayer.PlayerInfo.PlayerId.Value.Text = tostring(Player.UserId)
-	local AgeYears = 0
-	local AgeMonths = 0
-	local Age = Player.AccountAge
-	while Age > 365 do
-		AgeYears += 1
-		Age -= 365
-	end
-	while Age > 30 do
-		AgeMonths += 1
-		Age -= 30
-	end
-	ControlPanel.MainWindow.TargetPlayer.PlayerInfo.AccountAge.Value.Text = tostring(AgeYears).." Years "..tostring(AgeMonths).." Months "..tostring(Age).. " Days"
-	ControlPanel.MainWindow.TargetPlayer.PlayerInfo.IsAdmin.Value.Text = "False"
-	if Player.Character ~= nil then
-		if Player.Character:FindFirstChild("ClientFramework") then
-			if Player.Character.ClientFramework:FindFirstChild("AdminModule") then
-				ControlPanel.MainWindow.TargetPlayer.PlayerInfo.IsAdmin.Value.Text = "True"
+local function MonitorTargetPlayer(Player)
+	local sUserId = tostring(Player.UserId)
+	local Velocity
+	local UserPos
+	while GUI.Main.Players.UserId.TextBox.Text == sUserId do
+		if Player.Character ~= nil then
+			if Player.Character.HumanoidRootPart ~= nil then
+				Velocity = math.floor(Player.Character.HumanoidRootPart.Velocity.magnitude)
+				UserPos = Player.Character.HumanoidRootPart.Position
+				GUI.Main.Players.Velocity.TextBox.Text = tostring(Velocity)
+				GUI.Main.Players.UserPos.TextBox.Text = tostring(math.floor(UserPos.X)) .. ", " .. tostring(math.floor(UserPos.Y)) .. ", " .. tostring(math.floor(UserPos.Z))
 			end
-		end	
+		end
+		wait(0.1)
 	end
 end
 
-local function UpdatePlayerList()
-	for _, PlayerBar in pairs(ControlPanel.MainWindow.PlayerList:GetChildren()) do
-		if PlayerBar.Name == "PlayerBar" then
-			PlayerBar:Destroy()
+local function ToggleTargetPlayer(Player)
+	for _, Entry in pairs(GUI.Main.Players.PlayerList:GetChildren()) do
+		if Entry:IsA("TextButton") then
+			if Entry.Text ~= "  "..Player.Name then
+				Entry.BackgroundColor3 = SecondaryColor
+			else
+				Entry.BackgroundColor3 = PrimaryColor
+			end
 		end
 	end
-	
-	local YPos = 0
-	for Index, Player in pairs(game:GetService("Players"):GetPlayers()) do
-		local PlayerBar = ControlPanel.MainWindow.PlayerList.EmptyPlayerBar:Clone()
-		coroutine.resume(coroutine.create(function()
-			local Image, Ready = game:GetService("Players"):GetUserThumbnailAsync(Player.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size60x60)
-			PlayerBar.Headshot.Image = Image
-		end))
-		PlayerBar.Name = "PlayerBar"
-		PlayerBar.Parent = ControlPanel.MainWindow.PlayerList
-		PlayerBar.NameButton.Text = Player.Name
-		PlayerBar.Position = UDim2.new(0, 10, 0, YPos);
-		PlayerBar.Visible = true
-		YPos += 40
-		PlayerBar.NameButton.MouseButton1Click:Connect(function()
-			SetTargetPlayer(Player)
+	coroutine.resume(coroutine.create(function()
+		local Image, Ready = PlayerService:GetUserThumbnailAsync(Player.UserId, Enum.ThumbnailType.AvatarThumbnail, Enum.ThumbnailSize.Size420x420)
+		GUI.Main.Players.AvatarImg.Image = Image
+	end))
+	GUI.Main.Players.Username.TextBox.Text = Player.Name
+	GUI.Main.Players.UserId.TextBox.Text = tostring(Player.UserId)
+	GUI.Main.Players.Nickname.TextBox.Text = Player.DisplayName
+	coroutine.resume(coroutine.create(MonitorTargetPlayer(Player)))
+end
+
+local function RefreshPlayerList()
+	local Y = 0
+	for _, Player in pairs(PlayerService:GetPlayers()) do
+		local GuiEntry = GUI.Main.Players.PlayerList.PlayerEntry:Clone()
+		GuiEntry.Position = UDim2.new(0, Y, 0, 0)
+		GuiEntry.Text = "  "..Player.Name
+		GuiEntry.Visible = true
+		GuiEntry.Parent = GUI.Main.Players.PlayerList
+		GuiEntry.MouseButton1Click:Connect(function()
+			ToggleTargetPlayer(Player)
 		end)
+		Y += 30
 	end
 end
 
-game:GetService("Players").PlayerAdded:Connect(UpdatePlayerList)
-ControlPanel.MainWindow.RefreshButton.MouseButton1Click:Connect(UpdatePlayerList)
-
-ControlPanel.MainWindow.Header.ExitButton.MouseButton1Click:Connect(function()
-	script:Destroy()
-end)
-
-ControlPanel.MainWindow.Header.MinimizeButton.MouseButton1Click:Connect(function()
-	ControlPanel.MainWindow.Visible = false
-	ControlPanel.PanelButton.Visible = true
-end)
-
-ControlPanel.PanelButton.MouseButton1Click:Connect(function()
-	ControlPanel.MainWindow.Visible = true
-	ControlPanel.PanelButton.Visible = false
-end)
-
-ControlPanel.MainWindow.TargetPlayer.SnapCameraButton.MouseButton1Click:Connect(function()
-	if _G.FreecamEnabled == true then
-		_G.CameraMovePos = TargetPlayer.Character.Head.CFrame.Position
-		_G.CameraMovePending = true
-	end
-end)
-
-ControlPanel.MainWindow.TargetPlayer.GlueCameraButton.MouseButton1Click:Connect(function()
-	if _G.GluecamEnabled == false then
-		_G.GluecamTarget = TargetPlayer
-		_G.GluecamEnabled = true
-		ControlPanel.MainWindow.TargetPlayer.GlueCameraButton.Text = "UnGlue Camera From Player"
-	else
-		_G.GluecamEnabled = false
-		ControlPanel.MainWindow.TargetPlayer.GlueCameraButton.Text = "Glue Camera To Player"
-	end
-end)
-
-UpdatePlayerList()
+RefreshPlayerList()
