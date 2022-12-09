@@ -1,3 +1,5 @@
+local Fartware = game.Players.LocalPlayer.PlayerGui:WaitForChild("Fartware")
+
 local function NavButtonSelect(NavButton)
 	for _, Button in pairs(Fartware.Main.Nav:GetChildren()) do
 		if Button:IsA("TextButton") and Button ~= NavButton then
