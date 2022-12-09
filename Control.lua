@@ -15,16 +15,6 @@ local function NavButtonSelect(NavButton)
 	end
 end
 
-local function ExploitToggle(ToggleFrame)
-	if ToggleFrame.TextLabel.Text == "N" then
-		ToggleFrame.TextLabel.Text = "Y"
-		ToggleFrame.TextLabel.TextColor3 = Color3.new(150 / 255, 255 / 255, 150 / 255)
-	else
-		ToggleFrame.TextLabel.Text = "N"
-		ToggleFrame.TextLabel.TextColor3 = Color3.new(255 / 255, 100 / 255, 100 / 255)
-	end
-end
-
 Fartware.Main.ExitButton.MouseButton1Click:Connect(function()
 	Fartware:Destroy()
 end)
@@ -45,14 +35,6 @@ for _, Button in pairs(Fartware.Main.Nav:GetChildren()) do
 	if Button:IsA("TextButton") then
 		Button.MouseButton1Click:Connect(function()
 			NavButtonSelect(Button)
-		end)
-	end
-end
-
-for _, Toggle in pairs(Fartware.Main.Home.Toggles:GetChildren()) do
-	if Toggle:IsA("Frame") then
-		Toggle.TextButton.MouseButton1Click:Connect(function()
-			ExploitToggle(Toggle)
 		end)
 	end
 end
