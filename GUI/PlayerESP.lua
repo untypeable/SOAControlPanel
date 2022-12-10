@@ -4,7 +4,6 @@ local PlayerName = Instance.new("TextLabel")
 local PlayerDistance = Instance.new("TextLabel")
 local PlayerGun = Instance.new("TextLabel")
 
-BillboardGui.Parent = game.Workspace.a
 BillboardGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 BillboardGui.Active = true
 BillboardGui.Adornee = game.Workspace.a.Head
@@ -52,3 +51,5 @@ PlayerGun.Text = "M1911 .45 ACP"
 PlayerGun.TextColor3 = Color3.fromRGB(255, 255, 255)
 PlayerGun.TextSize = 14.000
 PlayerGun.TextStrokeTransparency = 0.000
+
+return BillboardGui
