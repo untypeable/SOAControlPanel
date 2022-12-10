@@ -6,7 +6,6 @@ local PlayerGun = Instance.new("TextLabel")
 
 BillboardGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 BillboardGui.Active = true
-BillboardGui.Adornee = game.Workspace.a.Head
 BillboardGui.AlwaysOnTop = true
 BillboardGui.LightInfluence = 1.000
 BillboardGui.Size = UDim2.new(0, 250, 0, 48)
