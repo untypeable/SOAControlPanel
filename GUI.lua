@@ -196,5 +196,5 @@ MinButton.TextSize = 14.000
 
 Fartware.Name = "Fartware"
 Fartware.Parent = game.Players.LocalPlayer.PlayerGui
-
+Fartware.ResetOnSpawn = false
 Fartware.Main.Draggable = true
